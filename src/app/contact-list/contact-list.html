@@ -1,0 +1,50 @@
+<div class="p-4">
+  <h2 class="text-2xl font-bold mb-4">Contact List</h2>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="text-blue-600 font-semibold mb-2">
+    Loading contacts...
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="errorMessage" class="text-red-600 font-semibold mb-2">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Table -->
+  <table *ngIf="!loading && contacts.length > 0" class="min-w-full bg-white shadow-md rounded-lg">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="py-2 px-4 border-b">Name</th>
+        <th class="py-2 px-4 border-b">Phone</th>
+        <th class="py-2 px-4 border-b">Email</th>
+        <th class="py-2 px-4 border-b">City</th>
+        <th class="py-2 px-4 border-b">Message</th>
+        <th class="py-2 px-4 border-b">Edit</th>
+        <th class="py-2 px-4 border-b">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let contact of contacts" class="hover:bg-gray-50">
+        <td class="py-2 px-4 border-b">{{ contact.name }}</td>
+        <td class="py-2 px-4 border-b">{{ contact.phone }}</td>
+        <td class="py-2 px-4 border-b">{{ contact.email }}</td>
+        <td class="py-2 px-4 border-b">{{ contact.city }}</td>
+        <td class="py-2 px-4 border-b">{{ contact.message }}</td>
+        <td class="py-2 px-4 border-b cursor-pointer text-blue-600 hover:text-blue-800" (click)="editContact(contact)">
+          <i class="bi bi-pencil-square"></i>
+        </td>
+        <td class="py-2 px-4 border-b cursor-pointer text-red-600 hover:text-red-800"
+          (click)="deleteContact(contact._id)">
+          <i class="bi bi-trash3-fill"></i>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- No contacts -->
+  <div *ngIf="!loading && contacts.length === 0 && !errorMessage" class="text-gray-500 mt-2">
+    No contacts found.
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<aside
+  class="fixed top-20 rounded-lg left-5 h-[calc(100vh-64px)] bg-slate-800 text-white transition-all duration-300 overflow-hidden"
+  [class.w-64]="!collapsed"
+  [class.w-0]="collapsed"
+>
+  <ul class="mt-4" *ngIf="!collapsed">
+    <li><a class="flex items-center gap-6 text-3xl px-5 py-3 hover:bg-slate-700" routerLink="/"><i class="bi bi-speedometer2"></i>Dashboard</a></li>
+    <li><a class="flex items-center gap-6 text-xl px-5 py-3 hover:bg-slate-700" routerLink="/contacts"><i class="bi bi-list-columns"></i>Contact-list</a></li>
+    <li><a class="flex items-center gap-6 text-xl px-5 py-3 hover:bg-slate-700" routerLink="/subscribers"><i class="bi bi-envelope-fill"></i>Subscribers</a></li>
+    <li><a class="flex items-center gap-6 text-xl px-5 py-3 hover:bg-slate-700" routerLink="#">Reports</a></li>
+    <li><a class="flex items-center gap-6 text-xl px-5 py-3 hover:bg-slate-700" routerLink="#">Settings</a></li>
+  </ul>
+</aside>

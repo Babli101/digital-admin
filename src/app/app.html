@@ -1,0 +1,12 @@
+
+<app-sidebar [collapsed]="collapsed"></app-sidebar>
+
+<app-navbar (toggleSidebar)="toggleMenu()"></app-navbar>
+
+<div
+  class="transition-all duration-300 mt-16 p-6"
+  [class.ml-64]="!collapsed"
+  [class.ml-0]="collapsed"
+>
+  <router-outlet></router-outlet>
+</div>

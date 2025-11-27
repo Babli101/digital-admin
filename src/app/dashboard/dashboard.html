@@ -1,0 +1,81 @@
+<!-- TOP 3 BOXES -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full px-4">
+
+  <!-- Total Visitors -->
+  <div class="border border-gray-300 p-6 rounded-lg text-center">
+    <h2 class="text-xl font-bold bg-yellow-300 px-3 inline-block">Total Visitor</h2>
+    <p class="text-5xl font-bold text-red-600 mt-4">{{ todayVisitors }}</p>
+  </div>
+
+  <!-- Total Subscribers -->
+  <div class="border border-gray-300 p-6 rounded-lg text-center">
+    <h2 class="text-xl font-bold bg-yellow-300 px-3 inline-block">Total Subscriber</h2>
+    <p class="text-5xl font-bold text-red-600 mt-4">{{ totalSubscribers }}</p>
+  </div>
+
+  <!-- Total Contacts -->
+  <div class="border border-gray-300 p-6 rounded-lg text-center">
+    <h2 class="text-xl font-bold bg-yellow-300 px-3 inline-block">Total Contact</h2>
+    <p class="text-5xl font-bold text-red-600 mt-4">{{ totalContacts }}</p>
+  </div>
+
+</div>
+
+
+
+<!-- CHARTS SECTION -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10 px-4">
+
+  <!-- LINE CHART (2 Columns Wide) -->
+  <div class="md:col-span-2 bg-white shadow-md p-6 rounded-lg">
+
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-xl font-semibold">Unique Visitor</h2>
+
+      <div class="flex space-x-2">
+
+        <button 
+          (click)="setView('month')" 
+          [class.bg-blue-500]="selectedView === 'month'"
+          [class.text-white]="selectedView === 'month'"
+          class="px-4 py-1 border rounded-md transition">
+          Month
+        </button>
+
+        <button 
+          (click)="setView('week')" 
+          [class.bg-blue-500]="selectedView === 'week'"
+          [class.text-white]="selectedView === 'week'"
+          class="px-4 py-1 border rounded-md transition">
+          Week
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Line Chart -->
+    <apx-chart 
+      [series]="visitorSeries"
+      [chart]="visitorChart"
+      [xaxis]="visitorXAxis"
+      [stroke]="visitorStroke"
+      [fill]="visitorFill">
+    </apx-chart>
+
+  </div>
+
+
+  <!-- BAR CHART (1 Column) -->
+  <div class="bg-white shadow-md p-6 rounded-lg">
+    <h2 class="text-lg font-semibold mb-2">Weekly Subscriber</h2>
+
+    <apx-chart 
+      [series]="barSeries" 
+      [chart]="barChart" 
+      [xaxis]="barXAxis" 
+      [plotOptions]="barOptions">
+    </apx-chart>
+  </div>
+
+</div>
