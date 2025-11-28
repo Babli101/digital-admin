@@ -24,7 +24,7 @@ import {
 export class Dashboard implements OnInit {
 
   // ===========================
-  //    COUNTERS (API DATA)
+  //          COUNTERS
   // ===========================
   totalContacts = 0;
   totalSubscribers = 0;
@@ -39,33 +39,30 @@ export class Dashboard implements OnInit {
 
   ngOnInit() {
     this.loadCounters();
-    this.loadMonthData();       // Visitor chart default
-    this.loadSubscriberChart(); // Subscriber bar chart
+    this.loadMonthData();        // default visitor chart
+    this.loadSubscriberChart();  // subscriber bar chart
   }
 
   // ===========================
-  //    COUNTERS
+  //         COUNTERS
   // ===========================
   private loadCounters() {
-    // Contacts
     this.contactService.getContacts().subscribe((res: any) => {
       this.totalContacts = res.length || 0;
       this.weeklyContacts = Math.floor(this.totalContacts / 7);
     });
 
-    // Subscribers
     this.subscriberService.getAllSubscribers().subscribe((res: any) => {
       this.totalSubscribers = res.length || 0;
     });
 
-    // Visitors
     this.visitorService.getVisitorStats().subscribe((res: any) => {
       this.todayVisitors = res.today || 0;
     });
   }
 
   // ===========================
-  //   VISITOR CHART (WEEK/MONTH)
+  //  VISITOR CHART (BACKEND)
   // ===========================
   selectedView: 'month' | 'week' = 'month';
 
@@ -80,25 +77,33 @@ export class Dashboard implements OnInit {
     view === 'month' ? this.loadMonthData() : this.loadWeekData();
   }
 
+  // ---------------------------
+  // MONTH DATA FROM BACKEND
+  // ---------------------------
   loadMonthData() {
-    this.visitorSeries = [
-      { name: "Visitors", data: [80, 60, 150, 40, 90, 100, 110, 130, 90, 100, 120, 70] }
-    ];
-    this.visitorXAxis = { categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] };
+    this.visitorService.getMonthlyVisitors().subscribe((res: any) => {
+      this.visitorSeries = [
+        { name: "Visitors", data: res.data }
+      ];
+      this.visitorXAxis = { categories: res.categories };
+    });
   }
 
   loadWeekData() {
-    this.visitorSeries = [
-      { name: "Visitors", data: [50, 70, 40, 90, 55, 80, 60] }
-    ];
-    this.visitorXAxis = { categories: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"] };
+    this.visitorService.getWeeklyVisitors().subscribe((res: any) => {
+      this.visitorSeries = [
+        { name: "Visitors", data: res.data }
+      ];
+      this.visitorXAxis = { categories: res.categories };
+    });
   }
 
   // ===========================
-  //       BAR CHART (SUBSCRIBER)
+  //   SUBSCRIBER BAR CHART
   // ===========================
   barSeries: ApexAxisChartSeries = [];
   barChart: ApexChart = { type: "bar", height: 300 };
+
   barXAxis: ApexXAxis = {
     categories: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
     labels: {
@@ -108,6 +113,7 @@ export class Dashboard implements OnInit {
       }
     }
   };
+
   barOptions: ApexPlotOptions = {
     bar: {
       borderRadius: 4,
@@ -116,14 +122,14 @@ export class Dashboard implements OnInit {
   };
 
   loadSubscriberChart() {
-  this.subscriberService.getWeeklySubscribers().subscribe((res: any) => {
+    this.subscriberService.getWeeklySubscribers().subscribe((res: any) => {
 
-    console.log("WEEKLY API RESPONSE:", res);
+      console.log("WEEKLY API RESPONSE:", res);
 
-    this.barSeries = [{ name: "Subscribers", data: res.data }];
-    this.barXAxis = { categories: res.categories };
-  });
+      this.barSeries = [{ name: "Subscribers", data: res.data }];
+      this.barXAxis = { categories: res.categories };
+    });
+  }
+
 }
 
-
-}

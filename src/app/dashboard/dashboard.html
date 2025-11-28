@@ -1,56 +1,103 @@
-<!-- TOP 3 BOXES -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full px-4">
+<div class="flex flex-col md:flex-row justify-center items-center min-h-40 gap-3 p-4">
+  <!-- TODAY VISITORS -->
+  <div class="group relative w-80 h-44 bg-white shadow-2xl rounded-2xl 
+              flex flex-col items-center justify-center overflow-hidden 
+              transition-all duration-700 font-grandhotel">
 
-  <!-- Total Visitors -->
-  <div class="border border-gray-300 p-6 rounded-lg text-center">
-    <h2 class="text-xl font-bold bg-yellow-300 px-3 inline-block">Total Visitor</h2>
-    <p class="text-5xl font-bold text-red-600 mt-4">{{ todayVisitors }}</p>
+    <!-- Hover Layer -->
+    <div class="absolute top-0 right-0 w-12 h-12 rounded-tr-2xl rounded-bl-3xl 
+                bg-gradient-to-br from-yellow-300 via-pink-500 to-blue-600
+                transition-all duration-500 
+                group-hover:w-full group-hover:h-full group-hover:rounded-2xl">
+    </div>
+
+    <!-- ICON -->
+    <i class="bi bi-eye absolute top-1 right-3 text-2xl z-10 text-white group-hover:text-white"></i>
+
+    <h1 class="relative z-10 text-black group-hover:text-white text-lg font-semibold">
+      Today Visitors
+    </h1>
+
+    <h2 class="relative z-10 text-black group-hover:text-white text-2xl mt-2">
+      {{ todayVisitors }}
+    </h2>
   </div>
 
-  <!-- Total Subscribers -->
-  <div class="border border-gray-300 p-6 rounded-lg text-center">
-    <h2 class="text-xl font-bold bg-yellow-300 px-3 inline-block">Total Subscriber</h2>
-    <p class="text-5xl font-bold text-red-600 mt-4">{{ totalSubscribers }}</p>
+
+  <!-- TOTAL SUBSCRIBERS -->
+  <div class="group relative w-80 h-44 bg-white shadow-2xl rounded-2xl 
+              flex flex-col items-center justify-center overflow-hidden 
+              transition-all duration-700 font-belanosima">
+
+    <!-- Hover Layer -->
+    <div class="absolute top-3 w-12 h-12 bg-blue-500 rounded-full 
+                transition-all duration-500 
+                group-hover:top-0 group-hover:w-full group-hover:h-full group-hover:rounded-2xl"></div>
+
+    <!-- ICON -->
+    <i class="bi bi-envelope-fill absolute top-5 right-37 text-2xl z-10 text-white group-hover:text-white"></i>
+
+    <h1 class="relative z-10 text-black group-hover:text-white text-lg font-semibold">
+      Total Subscribers
+    </h1>
+
+    <p class="relative z-10 text-black group-hover:text-white text-2xl mt-2">
+      {{ totalSubscribers }}
+    </p>
   </div>
 
-  <!-- Total Contacts -->
-  <div class="border border-gray-300 p-6 rounded-lg text-center">
-    <h2 class="text-xl font-bold bg-yellow-300 px-3 inline-block">Total Contact</h2>
-    <p class="text-5xl font-bold text-red-600 mt-4">{{ totalContacts }}</p>
+
+  <!-- CONTACTS -->
+  <div class="group relative w-80 h-44 bg-white shadow-2xl rounded-2xl 
+              flex flex-col items-center justify-center overflow-hidden 
+              transition-all duration-700 font-kaushan">
+
+    <!-- Hover Layer -->
+    <div class="absolute bottom-0 left-0 w-12 h-12 bg-red-400 
+                rounded-bl-2xl rounded-tr-3xl transition-all duration-500
+                group-hover:bottom-0 group-hover:w-full group-hover:h-full group-hover:rounded-2xl"></div>
+
+    <!-- ICON -->
+    <i class="bi bi-chat-dots-fill absolute bottom-3 left-3 text-2xl z-10 text-white group-hover:text-white"></i>
+
+    <h4 class="relative z-10 text-black group-hover:text-white text-lg font-semibold">
+      Total Contacts
+    </h4>
+
+    <p class="relative z-10 text-black group-hover:text-white text-2xl mt-2">
+      {{ totalContacts }}
+    </p>
   </div>
 
 </div>
-
-
-
 <!-- CHARTS SECTION -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10 px-4">
 
-  <!-- LINE CHART (2 Columns Wide) -->
+  <!-- ========================= -->
+  <!--     VISITOR LINE CHART (2 Columns) -->
+  <!-- ========================= -->
   <div class="md:col-span-2 bg-white shadow-md p-6 rounded-lg">
 
     <!-- Header -->
     <div class="flex justify-between items-center mb-4">
-      <h2 class="text-xl font-semibold">Unique Visitor</h2>
+      <h2 class="text-xl font-semibold">Visitors</h2>
 
       <div class="flex space-x-2">
-
         <button 
           (click)="setView('month')" 
-          [class.bg-blue-500]="selectedView === 'month'"
-          [class.text-white]="selectedView === 'month'"
+          [class.bg-blue-500]="selectedView==='month'"
+          [class.text-white]="selectedView==='month'"
           class="px-4 py-1 border rounded-md transition">
           Month
         </button>
 
         <button 
           (click)="setView('week')" 
-          [class.bg-blue-500]="selectedView === 'week'"
-          [class.text-white]="selectedView === 'week'"
+          [class.bg-blue-500]="selectedView==='week'"
+          [class.text-white]="selectedView==='week'"
           class="px-4 py-1 border rounded-md transition">
           Week
         </button>
-
       </div>
     </div>
 
@@ -65,17 +112,20 @@
 
   </div>
 
-
-  <!-- BAR CHART (1 Column) -->
+  <!-- ========================= -->
+  <!--     SUBSCRIBER BAR CHART (1 Column) -->
+  <!-- ========================= -->
   <div class="bg-white shadow-md p-6 rounded-lg">
-    <h2 class="text-lg font-semibold mb-2">Weekly Subscriber</h2>
+
+    <h2 class="text-lg font-semibold mb-2">Weekly Subscribers</h2>
 
     <apx-chart 
-      [series]="barSeries" 
-      [chart]="barChart" 
-      [xaxis]="barXAxis" 
+      [series]="barSeries"
+      [chart]="barChart"
+      [xaxis]="barXAxis"
       [plotOptions]="barOptions">
     </apx-chart>
+
   </div>
 
 </div>
