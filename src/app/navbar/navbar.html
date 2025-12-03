@@ -1,10 +1,26 @@
-<nav class="fixed top-0 left-0 right-0 h-16 bg-white shadow flex items-center justify-between px-6 z-50">
-  <div (click)="onToggle()" class="text-2xl cursor-pointer">☰</div>
+<nav class="fixed top-0 left-0 right-0 h-16 bg-[#470000] shadow 
+            flex items-center justify-between px-6 z-50">
 
-  <h1 class="text-xl font-semibold">Dashboard</h1>
-
+  <!-- Left -->
   <div class="flex items-center gap-3">
-    <span>User</span>
-    <img class="w-10 h-10 rounded-full" src="https://i.pravatar.cc/40" />
+
+    <!-- MENU BUTTON -->
+    <svg class="w-7 h-7 text-white cursor-pointer" (click)="onToggle()" fill="none" stroke="currentColor"
+      viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+    </svg>
+
+    <!-- LOGO -->
+    <img src="logo1.png" class="h-[60px]" alt="logo">
   </div>
+
+  <!-- Right -->
+  <div class="flex items-center gap-3">
+    <img *ngIf="user?.image" [src]="'http://localhost:5000/uploads/' + user.image" class="w-10 h-10 rounded-full" />
+<span class="text-white font-medium">{{ user?.name }}</span>
+
+  </div>
+
+
+
 </nav>

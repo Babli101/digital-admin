@@ -1,0 +1,14 @@
+<div class="fixed inset-0 bg-black/40 backdrop-blur-md flex items-center justify-center z-50">
+  <div class="bg-white w-full max-w-sm rounded-xl shadow-lg p-6">
+    <h2 class="text-2xl font-bold text-center text-[#470000] mb-4">Admin Login</h2>
+    <form (ngSubmit)="login()" class="space-y-4">
+      <input type="email" [(ngModel)]="email" name="email" placeholder="Email" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#470000] outline-none"/>
+      <input type="password" [(ngModel)]="password" name="password" placeholder="Password" required class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#470000] outline-none"/>
+      <button type="submit" class="w-full py-2 bg-[#470000] text-white rounded-lg hover:bg-[#5c0000] transition">Login</button>
+      <p *ngIf="error" class="text-red-600 text-center text-sm">{{ error }}</p>
+    </form>
+    <div class="text-left mt-4">
+      <p>No account? <a routerLink="/signup" class="text-[#470000] hover:underline cursor-pointer font-medium">Signup</a></p>
+    </div>
+  </div>
+</div>
